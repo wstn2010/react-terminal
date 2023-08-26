@@ -16,16 +16,18 @@ export const useEditorInput = (
   setCaretPosition: any,
   setBeforeCaretText: any,
   setAfterCaretText: any,
-  enableInput: boolean
+  enableInput: boolean,
+  setCandidates: any,
+  completionHandler: any
 ) => {
   const { getPreviousCommand, getNextCommand } = React.useContext(TerminalContext);
 
-  const handleKeyDownEvent = (event: any) => {
+  const handleKeyDownEvent = async (event: any) => {
     if (!consoleFocused) {
       return;
     }
     //checks the value of enableInput and returns if its false
-    if(!enableInput){
+    if (!enableInput) {
       return;
     }
     event.preventDefault();
@@ -34,12 +36,33 @@ export const useEditorInput = (
 
     if (eventKey === "Enter") {
       setProcessCurrentLine(true);
+      setCandidates('');
       return;
     }
 
     let nextInput = null;
 
-    if (eventKey === "Backspace") {
+    if (eventKey === "Tab") {
+      if (completionHandler) {
+        const results = await completionHandler(editorInput);
+        console.log('results', results);
+        if (results.length === 1) {
+          // 補完実行
+          nextInput = editorInput.substring(0, editorInput.lastIndexOf(' ') + 1) + results[0];
+          setCaretPosition(nextInput.length);
+          setCandidates('');
+        } else if (results.length > 1) {
+          setCandidates(results.join(' '));
+          nextInput = editorInput
+        } else {
+          nextInput = editorInput
+          setCandidates('');
+        }
+      } else {
+        nextInput = editorInput
+        setCandidates('');
+      }
+    } else if (eventKey === "Backspace") {
       const [caretTextBefore, caretTextAfter] = Utils.splitStringAtIndex(editorInput, caretPosition);
       nextInput = caretTextBefore.slice(0, -1) + caretTextAfter;
       if (editorInput && editorInput.length !== 0) setCaretPosition(caretPosition - 1);
@@ -57,20 +80,20 @@ export const useEditorInput = (
       if (caretPosition < editorInput.length) setCaretPosition(caretPosition + 1);
       nextInput = editorInput
     } else if ((event.metaKey || event.ctrlKey) && eventKey.toLowerCase() === "v") {
-      navigator.clipboard.readText()
-      .then(pastedText => {
-        const [caretTextBefore, caretTextAfter] = Utils.splitStringAtIndex(editorInput || "", caretPosition);
-        nextInput = caretTextBefore + pastedText + caretTextAfter;
-        setCaretPosition(caretPosition + pastedText.length);
-        setEditorInput(nextInput);
-      });
+      // navigator.clipboard.readText()
+      // .then(pastedText => {
+      //   const [caretTextBefore, caretTextAfter] = Utils.splitStringAtIndex(editorInput || "", caretPosition);
+      //   nextInput = caretTextBefore + pastedText + caretTextAfter;
+      //   setCaretPosition(caretPosition + pastedText.length);
+      //   setEditorInput(nextInput);
+      // });
     } else if ((event.metaKey || event.ctrlKey) && eventKey.toLowerCase() === "c") {
       const selectedText = window.getSelection().toString();
       navigator.clipboard.writeText(selectedText)
-      .then(() => {
-        nextInput = editorInput;
-        setEditorInput(nextInput);
-      });
+          .then(() => {
+            nextInput = editorInput;
+            setEditorInput(nextInput);
+          });
     } else {
       if (eventKey && eventKey.length === 1) {
         const [caretTextBefore, caretTextAfter] = Utils.splitStringAtIndex(editorInput, caretPosition);
@@ -207,7 +230,8 @@ export const useCurrentLine = (
   errorMessage: any,
   enableInput: boolean,
   defaultHandler: any,
-  wrapperRef: any
+  wrapperRef: any,
+  completionHandler: any
 ) => {
   const style = React.useContext(StyleContext);
   const themeStyles = React.useContext(ThemeContext);
@@ -218,6 +242,7 @@ export const useCurrentLine = (
   const [caretPosition, setCaretPosition] = React.useState(0);
   const [beforeCaretText, setBeforeCaretText] = React.useState("");
   const [afterCaretText, setAfterCaretText] = React.useState("");
+  const [candidates, setCandidates] = React.useState('');
 
   React.useEffect(
     () => {
@@ -275,6 +300,9 @@ export const useCurrentLine = (
         ) : null}
         <span className={style.preWhiteSpace}>{afterCaretText}</span>
       </div>
+      <div>
+        {candidates}
+      </div>
     </>
   ) : (
     <>
@@ -298,7 +326,9 @@ export const useCurrentLine = (
     setCaretPosition,
     setBeforeCaretText,
     setAfterCaretText,
-    enableInput
+    enableInput,
+    setCandidates,
+    completionHandler
   );
 
   useBufferedContent(

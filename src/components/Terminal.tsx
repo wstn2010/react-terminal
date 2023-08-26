@@ -29,7 +29,8 @@ export default function Terminal(props: any) {
     welcomeMessage,
     errorMessage,
     enableInput,
-    defaultHandler
+    defaultHandler,
+    completionHandler
   } = props;
 
   const controls = showControlBar ? <Controls
@@ -47,6 +48,7 @@ export default function Terminal(props: any) {
     enableInput={enableInput}
     showControlBar={showControlBar}
     defaultHandler={defaultHandler}
+    completionHandler={completionHandler}
   />
 
   return (
@@ -80,6 +82,7 @@ Terminal.propTypes = {
   welcomeMessage: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.node]),
   errorMessage: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.node]),
   defaultHandler: PropTypes.func,
+  completionHandler: PropTypes.func,
 };
 
 Terminal.defaultProps = {
@@ -94,4 +97,5 @@ Terminal.defaultProps = {
   welcomeMessage: "",
   errorMessage: "not found!",
   defaultHandler: null,
+  completionHandler: null,
 };
