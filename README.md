@@ -102,9 +102,7 @@ The component comes with few in-built themes: `light`, `dark`, `material-light`,
 | `theme` | Theme of the terminal | "light"
 | `themes` | Themes object to supply custom themes | null
 | `defaultHandler` | Default handler to be used (if provided) when no commands match. Useful when you don't know list of commands beforehand/want to send them to server for handling. | null
-| `completionHandler` | Completion handler to be used (if provided) when 'tab' is pressed. The handler takes the entire input string and returns a list of candidates.
-If there is only one candidate, completion processing is performed.
-If there are two or more candidates, the candidates are displayed below the command line. | null
+| `completionHandler` | Completion handler to be used (if provided) when 'tab' is pressed. The handler takes the entire input string and returns a list of candidates. If there is only one candidate, completion processing is performed. If there are two or more candidates, the candidates are displayed below the command line. | null
 
 
 ## In-built commands
