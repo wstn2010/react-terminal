@@ -1,15 +1,4 @@
-<h1 align="center">
-  <img src="https://react-terminal.sirv.com/static/terminal-logo-text.png" data-canonical-src="https://react-terminal.sirv.com/static/terminal-logo-text.png" width="145" height="50" />
-</h1>
-
 <p align="center">🚀 React component that renders a Terminal 🖥 (This is enhanced project of react-terminal)</p>
-
-<p align="center">
-  <a href="https://github.com/bony2023/react-terminal/actions?query=Build+and+Test"><img src="https://github.com/bony2023/react-terminal/workflows/Build%20and%20Test/badge.svg" data-canonical-src="https://github.com/bony2023/react-terminal/workflows/Build%20and%20Test/badge.svg"/></a>
-  <a href="https://codecov.io/gh/bony2023/react-terminal"><img src="https://codecov.io/gh/bony2023/react-terminal/branch/main/graph/badge.svg?token=xt1kdpvlam" data-canonical-src="https://codecov.io/gh/bony2023/react-terminal/branch/main/graph/badge.svg?token=xt1kdpvlam"/></a>
-  <a href="https://www.npmjs.com/package/react-terminal"><img src="https://img.shields.io/npm/v/react-terminal/latest" data-canonical-src="https://img.shields.io/npm/v/react-terminal/latest"/></a>
-  <img src="https://img.shields.io/npm/l/react-terminal" data-canonical-src="https://img.shields.io/npm/l/react-terminal"/>
-</p>
 
 <p align="center">
   <a href="#features">Features</a> •
