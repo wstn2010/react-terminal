@@ -110,5 +110,3 @@ The component comes with few in-built themes: `light`, `dark`, `material-light`,
 |--|--|
 | clear | clears the console |
 
-## Report a bug
-If you found a bug in this library, please file an GitHub issue [here](https://github.com/bony2023/react-terminal/issues).
