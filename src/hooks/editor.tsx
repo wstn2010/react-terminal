@@ -45,7 +45,6 @@ export const useEditorInput = (
     if (eventKey === "Tab") {
       if (completionHandler) {
         const results = await completionHandler(editorInput);
-        console.log('results', results);
         if (results.length === 1) {
           // 補完実行
           nextInput = editorInput.substring(0, editorInput.lastIndexOf(' ') + 1) + results[0];

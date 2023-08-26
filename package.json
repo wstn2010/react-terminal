@@ -1,7 +1,7 @@
 {
-  "name": "react-terminal",
-  "version": "v1.3.1",
-  "description": "React component that renders a terminal",
+  "name": "react-terminal-ex",
+  "version": "v1.0.1",
+  "description": "Enhanced module of react-terminal, React component that renders a terminal",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
@@ -24,14 +24,15 @@
     "node",
     "npm",
     "react",
-    "terminal"
+    "terminal",
+    "autocompletion"
   ],
-  "author": "Bony Roopchandani",
+  "author": "Kenputer",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bony2023/react-terminal/issues"
+    "url": "https://github.com/wstn2010/react-terminal/issues"
   },
-  "homepage": "https://github.com/bony2023/react-terminal#readme",
+  "homepage": "https://github.com/wstn2010/react-terminal#readme",
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

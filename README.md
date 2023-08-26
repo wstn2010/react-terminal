@@ -2,7 +2,7 @@
   <img src="https://react-terminal.sirv.com/static/terminal-logo-text.png" data-canonical-src="https://react-terminal.sirv.com/static/terminal-logo-text.png" width="145" height="50" />
 </h1>
 
-<p align="center">🚀 React component that renders a Terminal 🖥</p>
+<p align="center">🚀 React component that renders a Terminal 🖥 (This is enhanced project of react-terminal)</p>
 
 <p align="center">
   <a href="https://github.com/bony2023/react-terminal/actions?query=Build+and+Test"><img src="https://github.com/bony2023/react-terminal/workflows/Build%20and%20Test/badge.svg" data-canonical-src="https://github.com/bony2023/react-terminal/workflows/Build%20and%20Test/badge.svg"/></a>
@@ -28,6 +28,7 @@
 - Command history using arrow up and down. 🔼
 - Support for copy/paste. 📋
 - In-built themes and support to create more. 🚀
+- Auto completion
 
 ## Installation
 Install package with NPM or YARN and add it to your development dependencies:
@@ -101,6 +102,10 @@ The component comes with few in-built themes: `light`, `dark`, `material-light`,
 | `theme` | Theme of the terminal | "light"
 | `themes` | Themes object to supply custom themes | null
 | `defaultHandler` | Default handler to be used (if provided) when no commands match. Useful when you don't know list of commands beforehand/want to send them to server for handling. | null
+| `completionHandler` | Completion handler to be used (if provided) when 'tab' is pressed. The handler takes the entire input string and returns a list of candidates.
+If there is only one candidate, completion processing is performed.
+If there are two or more candidates, the candidates are displayed below the command line. | null
+
 
 ## In-built commands
 | command | description |
