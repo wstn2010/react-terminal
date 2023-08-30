@@ -7,6 +7,28 @@ import { TerminalContext } from "../contexts/TerminalContext";
 
 import Utils from "../common/Utils"
 
+const removeSingleQuotes = (str:string) => str.replace(/'([^']+)'/g, '$1');
+
+const splitRegex = /'[^']*'|\S+/g;
+const splitToTokens = (str:string) => str.match(splitRegex)?.map(removeSingleQuotes) || [];
+
+const fixUnclosedSingleQuotes = (input:string) => {
+  let singleQuoteCount = 0;
+  let output = input;
+
+  for (let i = 0; i < input.length; i++) {
+    if (input[i] === "'") {
+      singleQuoteCount++;
+    }
+  }
+
+  if (singleQuoteCount % 2 !== 0) {
+    output += "'";
+  }
+
+  return output;
+};
+
 export const useEditorInput = (
   consoleFocused: boolean,
   editorInput: string,
@@ -47,7 +69,9 @@ export const useEditorInput = (
         const results = await completionHandler(editorInput);
         if (results.length === 1) {
           // 補完実行
-          nextInput = editorInput.substring(0, editorInput.lastIndexOf(' ') + 1) + results[0];
+          const tokens = splitToTokens(fixUnclosedSingleQuotes(editorInput));
+          tokens[tokens.length - 1] = results[0];
+          nextInput = tokens.join(' ');
           setCaretPosition(nextInput.length);
           setCandidates('');
         } else if (results.length > 1) {
