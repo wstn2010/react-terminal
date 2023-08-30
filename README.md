@@ -22,16 +22,16 @@
 ## Installation
 Install package with NPM or YARN and add it to your development dependencies:
 ```
-npm install react-terminal
+npm install react-terminal-ex
 ```
 OR
 ```
-yarn add react-terminal
+yarn add react-terminal-ex
 ```
 
 ## Usage
 ```
-import { ReactTerminal } from "react-terminal";
+import { ReactTerminal } from "react-terminal-ex";
 
 function App(props) {
   // Define commands here
@@ -50,7 +50,7 @@ function App(props) {
 
 Also make sure to wrap the main mountpoint around the `TerminalContextProvider`. This retains the state even when the component is unmounted and then mounted back:
 ```
-import { TerminalContextProvider } from "react-terminal";
+import { TerminalContextProvider } from "react-terminal-ex";
 
 ReactDOM.render(
   <TerminalContextProvider>
