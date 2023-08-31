@@ -267,6 +267,8 @@ export const useCurrentLine = (
   const [afterCaretText, setAfterCaretText] = React.useState("");
   const [candidates, setCandidates] = React.useState('');
 
+  useScrollToBottom(candidates, wrapperRef);
+
   React.useEffect(
     () => {
       if (!isMobile) {
