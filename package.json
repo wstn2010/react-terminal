@@ -1,6 +1,6 @@
 {
   "name": "react-terminal-ex",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Enhanced module of react-terminal, React component that renders a terminal",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
