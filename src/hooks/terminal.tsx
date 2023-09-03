@@ -12,12 +12,19 @@ export const useClickOutsideEvent = (ref: any, clickedInside: boolean, setClicke
     }
   };
 
+  function blurHandler(this: Window, event: FocusEvent): any {
+    setClickedInside(false);
+  }
+
   React.useEffect(() => {
     // Bind the event listener
     document.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener('blur', blurHandler);
+
     return () => {
       // Unbind the event listener on clean up
       document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("blur", blurHandler);
     };
   });
 };

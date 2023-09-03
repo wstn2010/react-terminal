@@ -10,13 +10,6 @@ import Controls from "./Controls";
 import Editor from "./Editor";
 
 export default function Terminal(props: any) {
-  const wrapperRef = React.useRef(null);
-  const [consoleFocused, setConsoleFocused] = React.useState(!isMobile);
-  const style = React.useContext(StyleContext);
-  const themeStyles = React.useContext(ThemeContext);
-
-  useClickOutsideEvent(wrapperRef, consoleFocused, setConsoleFocused);
-
   // Get all props destructively
   const {
     caret,
@@ -30,8 +23,17 @@ export default function Terminal(props: any) {
     errorMessage,
     enableInput,
     defaultHandler,
-    completionHandler
+    completionHandler,
+    initialConsoleFocused
   } = props;
+
+  const wrapperRef = React.useRef(null);
+  const [consoleFocused, setConsoleFocused] = React.useState(!isMobile && initialConsoleFocused);
+  const style = React.useContext(StyleContext);
+  const themeStyles = React.useContext(ThemeContext);
+
+  useClickOutsideEvent(wrapperRef, consoleFocused, setConsoleFocused);
+
 
   const controls = showControlBar ? <Controls
     consoleFocused={consoleFocused}
@@ -83,6 +85,7 @@ Terminal.propTypes = {
   errorMessage: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.node]),
   defaultHandler: PropTypes.func,
   completionHandler: PropTypes.func,
+  initialConsoleFocused: PropTypes.bool
 };
 
 Terminal.defaultProps = {
@@ -98,4 +101,5 @@ Terminal.defaultProps = {
   errorMessage: "not found!",
   defaultHandler: null,
   completionHandler: null,
+  initialConsoleFocused: true
 };
