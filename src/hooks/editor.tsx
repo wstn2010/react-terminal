@@ -148,6 +148,23 @@ export const useEditorInput = (
   );
 };
 
+const textContent = (elem: React.ReactElement | string): string => {
+  if (!elem) {
+    return '';
+  }
+  if (typeof elem === 'string') {
+    return elem;
+  }
+  const children = elem.props && elem.props.children;
+  if (children instanceof Array) {
+    return children.map(textContent).filter((e) => e && e.length > 0).join('\n');
+  }
+  // if (Array.isArray(elem)) {
+  //   return elem.map((e) => textContent(e)).join('\n');
+  // }
+  return textContent(children);
+};
+
 export const useBufferedContent = (
   processCurrentLine: any,
   setProcessCurrentLine: any,
@@ -212,7 +229,7 @@ export const useBufferedContent = (
               output = executor;
             }
           } else if (typeof defaultHandler === "function") {
-            output = await defaultHandler(command, commandArguments);
+            output = await defaultHandler(command, commandArguments, textContent(bufferedContent));
           } else if (typeof errorMessage === "function") {
             output = await errorMessage(command, commandArguments);
           } else {
