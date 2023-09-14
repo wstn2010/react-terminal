@@ -229,6 +229,7 @@ export const useBufferedContent = (
               output = executor;
             }
           } else if (typeof defaultHandler === "function") {
+            // TODO: 3rd arg: It might be better to render to string and then htmlToText
             output = await defaultHandler(command, commandArguments, textContent(bufferedContent));
           } else if (typeof errorMessage === "function") {
             output = await errorMessage(command, commandArguments);
