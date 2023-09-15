@@ -176,7 +176,8 @@ export const useBufferedContent = (
   setAfterCaretText: any,
   commands: any,
   errorMessage: any,
-  defaultHandler: any
+  defaultHandler: any,
+  clearHandler: any
 ) => {
   const { bufferedContent, setBufferedContent } = React.useContext(TerminalContext);
   const style = React.useContext(StyleContext);
@@ -200,6 +201,7 @@ export const useBufferedContent = (
           setCaretPosition(0);
           setBeforeCaretText("");
           setAfterCaretText("");
+          clearHandler();
           return
         }
 
@@ -272,7 +274,8 @@ export const useCurrentLine = (
   enableInput: boolean,
   defaultHandler: any,
   wrapperRef: any,
-  completionHandler: any
+  completionHandler: any,
+  clearHandler: any
 ) => {
   const style = React.useContext(StyleContext);
   const themeStyles = React.useContext(ThemeContext);
@@ -385,7 +388,8 @@ export const useCurrentLine = (
     setAfterCaretText,
     commands,
     errorMessage,
-    defaultHandler
+    defaultHandler,
+    clearHandler
   );
 
   return currentLine;

@@ -26,7 +26,8 @@ export default function Editor(props: any) {
     errorMessage,
     showControlBar,
     defaultHandler,
-    completionHandler
+    completionHandler,
+    clearHandler
   } = props;
 
   const currentLine = useCurrentLine(
@@ -38,7 +39,8 @@ export default function Editor(props: any) {
     enableInput,
     defaultHandler,
     wrapperRef,
-    completionHandler
+    completionHandler,
+    clearHandler
   );
 
   return (

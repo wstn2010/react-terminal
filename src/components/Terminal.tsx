@@ -24,7 +24,8 @@ export default function Terminal(props: any) {
     enableInput,
     defaultHandler,
     completionHandler,
-    initialConsoleFocused
+    initialConsoleFocused,
+    clearHandler
   } = props;
 
   const wrapperRef = React.useRef(null);
@@ -51,6 +52,7 @@ export default function Terminal(props: any) {
     showControlBar={showControlBar}
     defaultHandler={defaultHandler}
     completionHandler={completionHandler}
+    clearHandler={clearHandler}
   />
 
   return (
@@ -85,7 +87,8 @@ Terminal.propTypes = {
   errorMessage: PropTypes.oneOfType([PropTypes.string, PropTypes.func, PropTypes.node]),
   defaultHandler: PropTypes.func,
   completionHandler: PropTypes.func,
-  initialConsoleFocused: PropTypes.bool
+  initialConsoleFocused: PropTypes.bool,
+  clearHandler: PropTypes.func
 };
 
 Terminal.defaultProps = {
@@ -101,5 +104,6 @@ Terminal.defaultProps = {
   errorMessage: "not found!",
   defaultHandler: null,
   completionHandler: null,
-  initialConsoleFocused: true
+  initialConsoleFocused: true,
+  clearHandler: null
 };
